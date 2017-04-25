@@ -19,7 +19,6 @@ import com.squareup.picasso.Picasso;
 
 public class NewsItem extends RecyclerView.ViewHolder {
     public ObservableField<String> bTitle = new ObservableField<>();
-    public ObservableField<String> bAuthor = new ObservableField<>();
     public ObservableField<String> bDescription = new ObservableField<>();
     public ObservableField<String> bPublishedAt = new ObservableField<>();
 
@@ -27,10 +26,9 @@ public class NewsItem extends RecyclerView.ViewHolder {
         super(binding.getRoot());
         Picasso.with(context).load(article.getUrlToImage()).into(binding.ivImg);
         bTitle.set(article.getTitle());
-        bAuthor.set("Published by "+article.getAuthor());
         bDescription.set(article.getDescription());
-        bPublishedAt.set(article.getPublishedAt());
-        binding.ivImg.setOnClickListener(new View.OnClickListener() {
+        bPublishedAt.set(article.getPublishedAt().substring(0,10));
+        binding.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();

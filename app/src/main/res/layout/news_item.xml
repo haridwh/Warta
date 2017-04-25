@@ -12,6 +12,7 @@
     </data>
 
     <android.support.v7.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -49,17 +50,6 @@
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/tv_author"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                android:paddingStart="8dp"
-                android:text="@{vm.bAuthor}"
-                android:textSize="16sp"
-                tools:text="Author"/>
-
-            <TextView
                 android:id="@+id/tv_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -70,6 +60,17 @@
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
                 tools:text="Detail"/>
+            <TextView
+                android:id="@+id/tv_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingStart="8dp"
+                android:text="@{vm.bPublishedAt}"
+                android:textSize="16sp"
+                android:layout_gravity="end"
+                tools:text="Author"/>
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
