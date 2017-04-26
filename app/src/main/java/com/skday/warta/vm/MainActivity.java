@@ -43,15 +43,12 @@ public class MainActivity extends AppCompatActivity {
         binding.rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         binding.rv.setHasFixedSize(true);
         adapter = new ArticlesAdapter(this, articleList);
-        getSource();
-        loadArticle();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         getSource();
-        articleList.clear();
         loadArticle();
     }
 
@@ -77,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loadArticle(){
+        articleList.clear();
         binding.rv.setVisibility(View.GONE);
         ApiClient client = Service.createService(ApiClient.class);
         Call<ArticlesDao> call = client.getArticles(source);

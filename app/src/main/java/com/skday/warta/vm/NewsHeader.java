@@ -9,22 +9,25 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.skday.warta.R;
+import com.skday.warta.databinding.NewsHeaderBinding;
 import com.skday.warta.databinding.NewsItemBinding;
 import com.skday.warta.model.Article;
 import com.squareup.picasso.Picasso;
 
 /**
- * Created by skday on 4/18/17.
+ * Created by skday on 4/26/17.
  */
 
-public class NewsItem extends RecyclerView.ViewHolder {
+public class NewsHeader extends RecyclerView.ViewHolder {
     public ObservableField<String> bTitle = new ObservableField<>();
+    public ObservableField<String> bDescription = new ObservableField<>();
     public ObservableField<String> bPublishedAt = new ObservableField<>();
 
-    public NewsItem(NewsItemBinding binding, final Context context, final Article article ) {
+    public NewsHeader(NewsHeaderBinding binding, final Context context, final Article article ) {
         super(binding.getRoot());
         Picasso.with(context).load(article.getUrlToImage()).into(binding.ivImg);
         bTitle.set(article.getTitle());
+        bDescription.set(article.getDescription());
         if (article.getPublishedAt() == null){
             bPublishedAt.set(article.getPublishedAt());
         } else {
@@ -42,3 +45,4 @@ public class NewsItem extends RecyclerView.ViewHolder {
         });
     }
 }
+

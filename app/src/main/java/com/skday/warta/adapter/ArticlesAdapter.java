@@ -8,8 +8,10 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.skday.warta.R;
+import com.skday.warta.databinding.NewsHeaderBinding;
 import com.skday.warta.databinding.NewsItemBinding;
 import com.skday.warta.model.Article;
+import com.skday.warta.vm.NewsHeader;
 import com.skday.warta.vm.NewsItem;
 
 import java.util.List;
@@ -22,6 +24,8 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.Bindin
 
     private Context context;
     private List<Article> articleList;
+    public final int ITEM_TYPE_NORMAL = 0;
+    public final int ITEM_TYPE_HEADER = 1;
 
     public ArticlesAdapter(Context context, List<Article> articleList) {
         this.context = context;
@@ -30,20 +34,42 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.Bindin
 
     @Override
     public BindingHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        NewsItemBinding binding =
-                DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.news_item, parent, false);
-        return new ItemBindingHolder(binding);
+        if (viewType == ITEM_TYPE_HEADER){
+            NewsHeaderBinding binding =
+                    DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.news_header, parent, false);
+            return new HeaderBindingHolder(binding);
+        }else {
+            NewsItemBinding binding =
+                    DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.news_item, parent, false);
+            return new ItemBindingHolder(binding);
+        }
     }
 
     @Override
     public void onBindViewHolder(BindingHolder holder, int position) {
-        ((ItemBindingHolder) holder).getBinding()
-                .setVm(new NewsItem(((ItemBindingHolder) holder).getBinding(), context, articleList.get(position)));
+        final int viewType = getItemViewType(position);
+        if (viewType == ITEM_TYPE_HEADER){
+
+            ((HeaderBindingHolder) holder).getBinding()
+                    .setVm(new NewsHeader(((HeaderBindingHolder) holder).getBinding(), context, articleList.get(position)));
+        }else if (viewType == ITEM_TYPE_NORMAL){
+            ((ItemBindingHolder) holder).getBinding()
+                    .setVm(new NewsItem(((ItemBindingHolder) holder).getBinding(), context, articleList.get(position)));
+        }
     }
 
     @Override
     public int getItemCount() {
         return articleList.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 0){
+            return ITEM_TYPE_HEADER;
+        }else{
+            return ITEM_TYPE_NORMAL;
+        }
     }
 
     public static class BindingHolder extends RecyclerView.ViewHolder{
@@ -56,6 +82,19 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.Bindin
 
         public ViewDataBinding getBinding() {
             return this.binding;
+        }
+    }
+
+    public static class HeaderBindingHolder extends BindingHolder{
+        private NewsHeaderBinding binding;
+        public HeaderBindingHolder(NewsHeaderBinding binding) {
+            super(binding);
+            this.binding = binding;
+        }
+
+        @Override
+        public NewsHeaderBinding getBinding() {
+            return binding;
         }
     }
 
