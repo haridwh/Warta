@@ -54,7 +54,8 @@
                 android:id="@+id/tv_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
                 android:text="@{vm.bDescription}"
@@ -67,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
-                android:paddingStart="8dp"
+                android:paddingBottom="4dp"
                 android:text="@{vm.bPublishedAt}"
                 android:textSize="16sp"
                 tools:text="Date"/>

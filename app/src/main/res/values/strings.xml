@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Warta</string>
+    <string name="poweredBy">powered by <u><b>NewsAPI.org</b></u></string>
 </resources>

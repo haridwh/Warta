@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.skday.warta.R;
 import com.skday.warta.adapter.SourceAdapter;
+import com.skday.warta.base.BaseActivity;
 import com.skday.warta.databinding.ActivitySourceBinding;
 import com.skday.warta.model.Source;
 import com.skday.warta.model.SourcesDao;
@@ -21,7 +22,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SourceActivity extends AppCompatActivity {
+public class SourceActivity extends BaseActivity {
 
     private ActivitySourceBinding binding;
     private List<Source> sourceList = new ArrayList<>();
@@ -33,6 +34,7 @@ public class SourceActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_source);
         binding.setVm(this);
         setSupportActionBar(binding.toolBar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Source");
         binding.rv.setHasFixedSize(true);
         binding.rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
